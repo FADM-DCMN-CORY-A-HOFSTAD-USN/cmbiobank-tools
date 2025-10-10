@@ -567,13 +567,14 @@ strategies <- list(
                 ) %>%
             select( -parent_id, -bcr_subspec_id, -participant_id.y )
         ## add template worksheet and column locations
-        idc_mapping  <- read_excel("icd-bb-mapping-2023-10-09.xlsx")
+        idc_mapping  <- read_excel("./idc-bb-mapping-2023-10-09.xlsx")
         loc <- names(idc_data) %>% map_chr(function (s) { x <-idc_mapping %>% filter(`Field`== s ) %>% select(Worksheet, Column) ; str_c(x$Worksheet[1], x$Column[1]) })
         loc  <-  data.frame(t(loc))
         names(loc) <- names(idc_data)
-        idc_data <- idc_data %>% add_row(loc[1,],.before=1)
+        idc_data <- idc_data %>% add_row(loc[1,],.before=1) %>% unique
         ## now order the columns according to location
-        idc_data <- idc_data  %>% select( names(idc_data[1,order(idc_data[1,])]) )
+        nms <- names(idc_data[1,order(idc_data[1,])])
+        idc_data[nms]
         
     }
 )

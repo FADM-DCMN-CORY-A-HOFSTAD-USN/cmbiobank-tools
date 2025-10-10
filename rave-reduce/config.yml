@@ -212,3 +212,12 @@ entity_ids_from_xls:
     entity_ids.xls.rds:
       strategy: entity_ids_from_xls
       delim: null
+idc_slide_data:
+  description: |
+    Create a metadata file for IDC from pathology slide metadata. IDC uses this to
+    convert SVS to DICOM.
+  idc_excel: "icd-bb-mapping-2023-10-09.xlsx"
+  output:
+    cmb-path-slides-idc.tsv:
+      strategy: idc_slide_data
+      delim: "\t"

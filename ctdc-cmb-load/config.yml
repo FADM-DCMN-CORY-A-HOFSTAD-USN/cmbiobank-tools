@@ -1,5 +1,6 @@
 # example
 default:
-  datadir: ./cmb/data
-  mapfile: cmb-dbgap-to-ctdc-mapping.xlsx
-  outdir: ./ctdc/data
+  datadir: "/Users/jensenma/Code/ctdc-cmb-load/data-2025-03-10/Version 5"
+  mapfile: /Users/jensenma/Code/ctdc-cmb-load/data-2025-03-10/cmb-dbgap-to-ctdc-mapping.v03-28-25.xlsx
+  outdir: /Users/jensenma/Code/ctdc-cmb-load/ctdc-data/data
+  

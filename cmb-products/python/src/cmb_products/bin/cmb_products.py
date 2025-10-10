@@ -102,7 +102,6 @@ def do():
     entity_ids_rds = entity_ids.by_suffix(".rds")
     rave_dumps = fs.FileSeries(locs["rave_dump_source"])
     vari_inventory = fs.FileSeries(locs["vari_inventory_source"])
-
     #local sinks
     tcia_local = fs.FileSeries(locs["tcia_local"])
     uams_local = fs.FileSeries(locs["uams_local"])

@@ -5,6 +5,7 @@ suppressPackageStartupMessages(library(lubridate))
 suppressPackageStartupMessages(library(readxl))
 suppressPackageStartupMessages(library(optparse))
 suppressPackageStartupMessages(library(config))
+Sys.setenv(VROOM_CONNECTION_SIZE = 50000000)
 options(error = traceback)
 ## default common columns (denormalized across tables coming from Rave)
 com_cols_default <- c("project", "subjectId", "Subject", "siteid", "Site","SiteNumber")
@@ -97,8 +98,10 @@ if (is.null(opts$options$bcr_slide_file_dir) | (opts$options$bcr_slide_file_dir 
         ff  <- grep("xlsx",dir(opts$options$bcr_slide_file_dir),value=T)
         bcr_slides  <- NULL
         for (f in ff) bcr_slides  <- bcr_slides %>%
+                          
                           bind_rows(
-                              read_excel(file.path(opts$options$bcr_slide_file_dir,f)))
+                              read_excel(file.path(opts$options$bcr_slide_file_dir,f)) %>%
+                              select(`Barcode ID`, `External Case Id`, `Image ID`, `Slide ID`, `Image File Name`))
         bcr_slides <- bcr_slides %>% unique()
         # check for missing data in file name column
         missing  <- bcr_slides %>% dplyr::filter( is.na(`Image File Name`)  | is.null(`Image File Name`) )
